@@ -85,7 +85,7 @@ html[data-tone="light"] :focus-visible{outline-color:#1d3f8a}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* 5 Intestazione --------------------------------------------------------- */
-.demo-strip{display:block;background:var(--night);color:#f6ead9;text-align:center;text-decoration:none;padding:9px var(--pad);font-size:1rem;line-height:1.4}
+.demo-strip{display:flex;align-items:center;justify-content:center;min-height:44px;background:var(--night);color:#f6ead9;text-align:center;text-decoration:none;padding:9px var(--pad);font-size:1rem;line-height:1.4}
 .demo-strip__go{color:var(--sun);font-weight:600;text-decoration:underline;text-underline-offset:.2em;white-space:nowrap}
 .hdr{position:sticky;top:0;z-index:60;height:var(--hdr);transition:background-color .35s ease}
 .hdr::before{content:"";position:absolute;inset:0;background:var(--paper);opacity:.9;z-index:-1;border-bottom:1px solid var(--line);transition:background-color .35s ease}
@@ -242,16 +242,16 @@ main{position:relative;z-index:1;display:block}
 }
 
 /* Colazione: polaroid sparse */
-.break{display:grid;gap:34px}
+.break{display:grid;gap:34px;grid-template-columns:minmax(0,1fr)}
 .break__title{font-size:clamp(2rem,8vw,4.2rem);max-width:12ch}
-.break__pols{display:grid;grid-template-columns:1fr 1fr;gap:20px 16px;align-items:start}
+.break__pols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 16px;align-items:start}
 .break__pols .pol:nth-child(1){--r:-3deg;grid-column:1 / 2}
 .break__pols .pol:nth-child(2){--r:2.5deg;margin-top:46px}
 .break__pols .pol:nth-child(3){--r:-1.5deg;grid-column:1 / 3;max-width:70%;justify-self:center}
 .break__pols .pol:nth-child(3) .ph{--ar:1/1}
 @media (min-width:900px){
-  .break{grid-template-columns:1fr 1.3fr;gap:70px;align-items:center}
-  .break__pols{grid-template-columns:repeat(3,1fr)}
+  .break{grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:70px;align-items:center}
+  .break__pols{grid-template-columns:repeat(3,minmax(0,1fr))}
   .break__pols .pol:nth-child(3){grid-column:auto;max-width:none}
   .break__pols .pol:nth-child(2){margin-top:70px}
 }
@@ -388,7 +388,8 @@ html[data-tone="dark"] .filters button[aria-pressed="true"]{color:var(--night)}
 }
 
 /* 13 Prenota ------------------------------------------------------------- */
-.book{display:grid;gap:26px;padding-bottom:50px}
+.book{display:grid;gap:26px;padding-bottom:50px;grid-template-columns:minmax(0,1fr)}
+.book__main{min-width:0}
 .step{background:var(--paper);color:var(--card-ink);border-radius:8px;padding:20px;box-shadow:0 10px 24px rgba(44,26,34,.22)}
 .step__h{display:flex;align-items:baseline;gap:12px;margin-bottom:14px}
 .step__n{font-family:var(--f-hand);font-weight:700;font-size:1.3rem;border:2px solid var(--coral);color:var(--coral);border-radius:50%;width:36px;height:36px;display:grid;place-items:center;flex:none}
@@ -402,7 +403,7 @@ html[data-tone="dark"] .filters button[aria-pressed="true"]{color:var(--night)}
 .cal__grid{display:grid;grid-template-columns:repeat(7,1fr);gap:0;text-align:center}
 .cal__dow{font-family:var(--f-hand);font-size:1rem;color:var(--card-soft);padding:4px 0}
 .cal__day{
-  min-height:46px;aspect-ratio:1/1;max-height:54px;border:0;border-radius:10px;background:transparent;font-size:1.0625rem;font-variant-numeric:tabular-nums;
+  min-height:44px;aspect-ratio:1/1;max-height:54px;border:0;border-radius:10px;background:transparent;font-size:1.0625rem;font-variant-numeric:tabular-nums;
   color:var(--card-ink);position:relative;transition:transform .08s ease,background-color .12s;
 }
 .cal__day:hover:not([disabled]){background:var(--paper-2)}
@@ -452,7 +453,7 @@ html[data-tone="dark"] .filters button[aria-pressed="true"]{color:var(--night)}
 .status.is-busy::before{content:"";display:inline-block;width:16px;height:16px;border:3px solid var(--card-ink);border-right-color:transparent;border-radius:50%;margin-right:8px;vertical-align:-3px;animation:spin .8s linear infinite}
 .copy{margin-top:10px}
 @media (min-width:900px){
-  .book{grid-template-columns:1.2fr 1fr;align-items:start;gap:34px}
+  .book{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);align-items:start;gap:34px}
   .book__side{position:sticky;top:calc(var(--hdr) + 14px)}
 }
 
