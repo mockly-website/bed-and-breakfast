@@ -352,6 +352,7 @@ main{position:relative;z-index:1;display:block}
 html[data-tone="dark"] .filters button[aria-pressed="true"]{color:var(--night)}
 .mapwrap{display:grid;gap:22px}
 .map{position:relative;background:var(--paper);border-radius:6px;box-shadow:0 14px 30px rgba(44,26,34,.3);padding:10px;color:var(--card-ink);overflow:hidden}
+.map{max-width:520px;margin-inline:auto;width:100%}
 .map__box{position:relative}
 .map svg{width:100%;height:auto;display:block}
 .map__land{fill:#f0e1c0}.map__sea{fill:#cfe6ee}
@@ -384,7 +385,7 @@ html[data-tone="dark"] .filters button[aria-pressed="true"]{color:var(--night)}
 .entry button.focus:active{transform:scale(.95)}
 @media (min-width:900px){
   .mapwrap{grid-template-columns:1.1fr 1fr;align-items:start}
-  .mapwrap .map{position:sticky;top:calc(var(--hdr) + 14px)}
+  .mapwrap .map{position:sticky;top:calc(var(--hdr) + 14px);max-width:none;margin-inline:0}
   .entry{grid-template-columns:240px 1fr;align-items:start}
 }
 
