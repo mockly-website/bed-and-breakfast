@@ -75,8 +75,9 @@ html[data-tone="light"] :focus-visible{outline-color:#1d3f8a}
 .sky__l:nth-child(1){opacity:1;background:linear-gradient(#f0a6a0 0%,#f9c9a8 55%,#fde6c4 100%)}
 .sky__l:nth-child(2){background:linear-gradient(#fbe3b8 0%,#fdf0d4 60%,#fff7e6 100%)}
 .sky__l:nth-child(3){background:linear-gradient(#8cc7ea 0%,#c9e6f2 60%,#eef8f8 100%)}
-.sky__l:nth-child(4){background:linear-gradient(#e27b50 0%,#f19a52 55%,#f8c576 100%)}
-.sky__l:nth-child(5){background:linear-gradient(#0f1a3c 0%,#1c2c5a 70%,#2b3d72 100%)}
+.sky__l:nth-child(4){background:linear-gradient(#f3d59a 0%,#f9e6c1 60%,#fdf2dc 100%)}
+.sky__l:nth-child(5){background:linear-gradient(#e27b50 0%,#f19a52 55%,#f8c576 100%)}
+.sky__l:nth-child(6){background:linear-gradient(#0f1a3c 0%,#1c2c5a 70%,#2b3d72 100%)}
 .stars{position:fixed;left:0;top:0;width:100%;height:100vh;height:100lvh;z-index:-2;pointer-events:none;opacity:0}
 .sun,.moon{position:fixed;left:0;top:0;z-index:-1;pointer-events:none;width:84px;height:84px;margin:-42px 0 0 -42px;will-change:transform,opacity}
 .moon{opacity:0}
@@ -85,7 +86,7 @@ html[data-tone="light"] :focus-visible{outline-color:#1d3f8a}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* 5 Intestazione --------------------------------------------------------- */
-.demo-strip{display:flex;align-items:center;justify-content:center;min-height:44px;background:var(--night);color:#f6ead9;text-align:center;text-decoration:none;padding:9px var(--pad);font-size:1rem;line-height:1.4}
+.demo-strip{display:flex;flex-wrap:wrap;column-gap:.4em;align-items:center;justify-content:center;min-height:44px;background:var(--night);color:#f6ead9;text-align:center;text-decoration:none;padding:9px var(--pad);font-size:1rem;line-height:1.4}
 .demo-strip__go{color:var(--sun);font-weight:600;text-decoration:underline;text-underline-offset:.2em;white-space:nowrap}
 .hdr{position:sticky;top:0;z-index:60;height:var(--hdr);transition:background-color .35s ease}
 .hdr::before{content:"";position:absolute;inset:0;background:var(--paper);opacity:.9;z-index:-1;border-bottom:1px solid var(--line);transition:background-color .35s ease}
@@ -439,6 +440,7 @@ html[data-tone="dark"] .filters button[aria-pressed="true"]{color:var(--night)}
 .field input:focus,.field textarea:focus{border-color:var(--card-ink);outline:3px solid var(--sun);outline-offset:1px}
 .field--err input,.field--err textarea{border-color:#b3261e;background:#fff3f1}
 .err{color:#a3211a;font-weight:600;font-size:1rem;min-height:1.5em}
+html[data-tone="dark"] .err--sky{color:#ffb3a7}   /* l'errore che sta sul cielo di sera, non sulla carta */
 .summary{background:var(--paper);color:var(--card-ink);border-radius:8px;padding:20px;box-shadow:0 10px 24px rgba(44,26,34,.22)}
 .summary--empty{background:transparent;border:2px dashed var(--ink);box-shadow:none;color:var(--ink);text-align:center;font-family:var(--f-hand);font-size:1.3rem;padding:30px 20px}
 .summary h2{font-size:1.6rem;margin-bottom:10px}
@@ -448,7 +450,7 @@ html[data-tone="dark"] .filters button[aria-pressed="true"]{color:var(--night)}
 .summary dd{margin:0;font-weight:600;text-align:right}
 .summary .total{display:flex;justify-content:space-between;align-items:baseline;margin-top:12px;font-size:1.2rem;font-weight:700}
 .summary .total span:last-child{font-family:var(--f-hand);font-size:2rem;color:var(--coral)}
-.demo-note{margin-top:12px;padding:12px 14px;background:#fff4cf;border-left:5px solid var(--sun);border-radius:4px;font-size:1rem}
+.demo-note{margin-top:12px;padding:12px 14px;color:var(--card-ink);background:#fff4cf;border-left:5px solid var(--sun);border-radius:4px;font-size:1rem}
 .status{margin-top:12px;min-height:1.6em;font-weight:600}
 .status.is-busy::before{content:"";display:inline-block;width:16px;height:16px;border:3px solid var(--card-ink);border-right-color:transparent;border-radius:50%;margin-right:8px;vertical-align:-3px;animation:spin .8s linear infinite}
 .copy{margin-top:10px}
@@ -466,6 +468,7 @@ html[data-tone="dark"] .filters button[aria-pressed="true"]{color:var(--night)}
 /* 14 Piè di pagina ------------------------------------------------------- */
 .ftr{position:relative;z-index:1;padding:50px 0 calc(110px + env(safe-area-inset-bottom));background:var(--night);color:#f6ead9}
 .ftr a{color:#f6ead9}
+.ftr a.btn{color:var(--card-ink)}
 .ftr__demo{font-size:1.2rem;font-weight:600;max-width:34rem}
 .ftr__cta{display:inline-flex;margin-top:14px}
 .ftr__grid{display:grid;gap:28px;margin-top:34px;padding-top:28px;border-top:1.5px dashed rgba(246,234,217,.35)}

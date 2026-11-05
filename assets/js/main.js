@@ -19,21 +19,22 @@
   });
 
   /* 2 Foto: appaiono dolcemente, e se una manca c'è un messaggio ------- */
-  [].forEach.call(d.querySelectorAll('.ph img'), function (img) {
-    function ok() { img.classList.add('is-loaded'); }
-    function ko() {
-      img.style.display = 'none';
-      var box = img.closest('.ph');
-      if (box && !box.querySelector('.ph__msg')) {
-        var m = d.createElement('span');
-        m.className = 'ph__msg ph--err';
-        m.textContent = O.t('Foto non disponibile');
-        box.appendChild(m);
-      }
+  function photoOk(img) { img.classList.add('is-loaded'); }
+  function photoKo(img) {
+    img.style.display = 'none';
+    var box = img.closest('.ph');
+    if (box && !box.querySelector('.ph__msg')) {
+      var m = d.createElement('span');
+      m.className = 'ph__msg ph--err';
+      m.textContent = O.t('Foto non disponibile');
+      box.appendChild(m);
     }
-    if (img.complete && img.naturalWidth) ok();
-    else if (img.complete) ko();
-    else { img.addEventListener('load', ok); img.addEventListener('error', ko); }
+  }
+  // un solo ascolto per tutte le foto (load ed error non salgono, ma si catturano)
+  d.addEventListener('load', function (e) { if (e.target.tagName === 'IMG' && e.target.closest('.ph')) photoOk(e.target); }, true);
+  d.addEventListener('error', function (e) { if (e.target.tagName === 'IMG' && e.target.closest('.ph')) photoKo(e.target); }, true);
+  [].forEach.call(d.querySelectorAll('.ph img'), function (img) {
+    if (img.complete) { if (img.naturalWidth) photoOk(img); else photoKo(img); }
   });
 
   /* 3 Polaroid: un tocco e si gira ------------------------------------ */
@@ -125,8 +126,8 @@
   var stars = d.querySelector('[data-stars]');
   var clockOut = d.querySelector('[data-clock-out]');
   var themeMeta = d.querySelector('meta[name="theme-color"]');
-  var TOPS = ['#f0a6a0', '#f9cf8e', '#7fbfe6', '#e27b50', '#0f1a3c'];
-  var KEYS = [[330, 0], [480, 0.25], [780, 0.5], [1110, 0.75], [1260, 1]];   // minuti → tempo del cielo (0..1)
+  var TOPS = ['#f0a6a0', '#fbe3b8', '#8cc7ea', '#f3d59a', '#e27b50', '#0f1a3c'];
+  var KEYS = [[330, 0], [480, 0.2], [720, 0.4], [960, 0.6], [1110, 0.8], [1260, 1]];   // minuti → tempo del cielo (0..1)
   var anchors = [];
   var vw = innerWidth, vh = innerHeight, maxScroll = 1;
   var last = { tone: '', clock: '', warm: -1, cool: -1, theme: '', op: [] };
@@ -177,12 +178,12 @@
     var t = skyTime(m);
 
     for (var k = 1; k < layers.length; k++) {
-      var o = Math.round(clamp(4 * t - (k - 1), 0, 1) * 500) / 500;
+      var o = Math.round(clamp((layers.length - 1) * t - (k - 1), 0, 1) * 500) / 500;
       if (last.op[k] !== o) { layers[k].style.opacity = o; last.op[k] = o; }
     }
-    var tone = t > 0.82 ? 'dark' : 'light';
+    var tone = t > 0.88 ? 'dark' : 'light';
     if (tone !== last.tone) { root.setAttribute('data-tone', tone); last.tone = tone; }
-    var theme = TOPS[Math.round(t * 4)];
+    var theme = TOPS[Math.round(t * (TOPS.length - 1))];
     if (themeMeta && theme !== last.theme) { themeMeta.setAttribute('content', theme); last.theme = theme; }
 
     var warm = Math.round(Math.max(tri(m, 330, 420, 540), tri(m, 1030, 1110, 1200)) * 50) / 50;

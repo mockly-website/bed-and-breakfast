@@ -115,9 +115,11 @@
     } else {
       var bad = false;
       for (var x = st.start; x < d; x = addDays(x, 1)) { if (taken(x)) { bad = true; break; } }
-      if (bad) st.err = 'errTaken';
-      else if (Math.round((d - st.start) / DAY) > MAX_NIGHTS) st.err = 'errLong';
-      else st.end = d;
+      var tooLong = Math.round((d - st.start) / DAY) > MAX_NIGHTS;
+      if (bad || tooLong) {
+        st.err = bad ? 'errTaken' : 'errLong';
+        if (!taken(d)) st.start = d;   // il tocco diventa il nuovo giorno di arrivo: si riparte da qui
+      } else st.end = d;
     }
     renderCal();
     renderSummary();
