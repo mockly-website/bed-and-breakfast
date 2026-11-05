@@ -1,0 +1,10 @@
+{
+  "name": "Casa Ostro — sito dimostrativo",
+  "short_name": "Casa Ostro",
+  "description": "Sito dimostrativo di Mockly per un bed & breakfast. L'attività è inventata.",
+  "start_url": "index.html",
+  "display": "browser",
+  "background_color": "#f9c9a8",
+  "theme_color": "#f0a6a0",
+  "icons": [{ "src": "assets/img/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}
